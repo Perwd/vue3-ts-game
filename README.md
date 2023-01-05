@@ -1,4 +1,4 @@
-# vue3-ts-game-sheep
+# vue3-ts-game-sheep2
 
 ## Project setup
 ```

@@ -1,23 +1,20 @@
 <template>
-   <YlyGame>
+  <YlyGame />
 
   <router-view></router-view>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue'
 // import HelloWorld from './components/HelloWorld.vue';
-import YlyGame from "./ylyGame/ylyGame.vue";
+import YlyGame from './ylyGame/ylyGame.vue'
 
 export default defineComponent({
-  name: "App",
+  name: 'App',
   components: {
     YlyGame,
-
-
-    
   },
-});
+})
 </script>
 
 <style>

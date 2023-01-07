@@ -21,6 +21,8 @@ module.exports = {
   rules: {
     // 禁止空块语句
     "no-empty": 2,
+    // 分号风格
+    "semi-style": 2,
     // 禁止不必要的布尔类型转换
     "no-extra-boolean-cast": 2,
     //禁止在return、throw,continue和break 语句后出现不可达代码

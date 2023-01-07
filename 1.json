@@ -9,14 +9,18 @@
     "security.workspace.trust.untrustedFiles": "open",
     "tabnine.experimentalAutoImports": true,
     "explorer.confirmDelete": false,
+    // "python.autoComplete.addBrackets": true,
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
+        // "editor.defaultFormatter": "HookyQR.beautify"
     },
+    // "bracketPairColorizer.showVerticalScopeLine": false,
     "js/ts.implicitProjectConfig.checkJs": true,
     "javascript.updateImportsOnFileMove.enabled": "always",
     "workbench.editor.enablePreview": false,
     "files.associations": {
-        "*.html": "html"
+        "*.html": "html",
+        "*.json": "jsonc"
     },
     "editor.autoClosingBrackets": "always",
     "editor.autoClosingDelete": "always",
@@ -26,14 +30,20 @@
     "vsicons.dontShowNewVersionMessage": true,
      "eslint.validate": ["typescript","vue"],
     "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+    // "oneDarkPro.editorTheme": "One Dark Pro Darker",
+    // "oneDarkPro.italic": false,
+    // "oneDarkPro.vivid": true,
     "[vue]": {
+        // "editor.defaultFormatter": "esbenp.prettier-vscode"
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "vetur.validation.script": false,
+    // "npm.keybindingsChangedWarningShown": true,
     "editor.linkedEditing": true,
     "files.autoSaveDelay": 100000,
     "workbench.statusBar.visible": false,
     "[typescript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "prettier.semi":false
 }

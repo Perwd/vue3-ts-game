@@ -1,6 +1,5 @@
 <template>
-  <div></div>
-  <!-- <div
+  <div
     class="card"
     :style="
       isDock
@@ -13,8 +12,17 @@
           }
     "
     @click="handleClick"
+    v-for="img in imgs"
+    :key="img"
   >
     <img
+      :src="img"
+      v-if="img.type === node.type"
+      alt=""
+      width="40"
+      height="40"
+    />
+    <!-- <img
       v-if="node.type === 1"
       src="../assets/tutu/1.png"
       width="40"
@@ -91,31 +99,98 @@
       src="../assets/tutu/13.png"
       width="40"
       height="40"
-    />
+    /> -->
     <div v-if="isFreeze" class="mask" />
-  </div> -->
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, defineProps, defineEmits } from 'vue'
-import type { CardNode } from '../types/ylyGame'
+import { computed, defineProps, defineEmits } from "vue"
+import type { CardNode } from "../types/ylyGame"
 
 interface Props {
   node: CardNode
   isDock?: boolean
 }
-// const props = defineProps<Props>()
-// const emit = defineEmits(["clickCard"])
 
-// const isFreeze = computed(() => {
-//   return props.node.parents.length > 0
-//     ? props.node.parents.some((o) => typeof o.state === "number" && o.state < 2)
-//     : false
-// })
+const imgs = [
+  {
+    type: 1,
+    src: "../assets/tutu/1.png",
+  },
+  {
+    type: 2,
+    src: "../assets/tutu/2.png",
+  },
+  {
+    type: 3,
+    src: "../assets/tutu/3.png",
+  },
+  {
+    type: 4,
+    src: "../assets/tutu/4.png",
+  },
+  {
+    type: 5,
+    src: "../assets/tutu/5.png",
+  },
+  {
+    type: 6,
+    src: "../assets/tutu/6.png",
+  },
+  {
+    type: 7,
+    src: "../assets/tutu/7.png",
+  },
+  {
+    type: 8,
+    src: "../assets/tutu/8.png",
+  },
+  {
+    type: 9,
+    src: "../assets/tutu/9.png",
+  },
+  {
+    type: 10,
+    src: "../assets/tutu/10.png",
+  },
+  {
+    type: 11,
+    src: "../assets/tutu/11.png",
+  },
+  {
+    type: 12,
+    src: "../assets/tutu/12.png",
+  },
+  {
+    type: 13,
+    src: "../assets/tutu/13.png",
+  },
+]
+// 加载图片资源
+const modules = import.meta.glob("../assets/tutu/*.png", {
+  as: "url",
+  import: "default",
+  eager: true,
+})
 
-// function handleClick() {
-//   if (!isFreeze.value) emit("clickCard", props.node)
-// }
+const props = defineProps<Props>({
+  node: {
+    type: Array,
+    default: [],
+  },
+})
+const emit = defineEmits(["clickCard"])
+
+const isFreeze = computed(() => {
+  return props.node.parents.length > 0
+    ? props.node.parents.some((o) => typeof o.state === "number" && o.state < 2)
+    : false
+})
+
+function handleClick() {
+  if (!isFreeze.value) emit("clickCard", props.node)
+}
 </script>
 
 <style scoped lang="less">

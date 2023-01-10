@@ -1,0 +1,16 @@
+// vite.config.ts
+import {defineConfig } from "vite";
+// 从“@vitejs/plugin-vue”导入 vue；
+// 从“路径”导入路径；
+
+export default defineConfig({
+plugins: [vue()],
+resolve: {
+alias: {
+"@": path.resolve(__dirname, "/src"),
+},
+},
+define: {
+"process.env": {} ,
+},
+});

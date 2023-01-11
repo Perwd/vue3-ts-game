@@ -105,7 +105,8 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue"
+import { computed, toRef, PropType } from "vue"
+
 import type { CardNode } from "../types/ylyGame"
 
 interface Props {
@@ -168,14 +169,13 @@ const imgs = [
   },
 ]
 // 加载图片资源
-const modules = import.meta.glob("../assets/tutu/*.png", {
-  as: "url",
-  import: "default",
-  eager: true,
-})
+// const modules = import.meta.glob("../assets/tutu/*.png", {
+//   as: "url",
+//   import: "default",
+//   eager: true,
+// })
 
 const req = require.context("../assets/tutu", true, /\.png$/)
-const pngHashMap = new Map()
 const pngHashMap = new Map()
 
 req.keys().forEach((eachPng) => {
@@ -184,14 +184,13 @@ req.keys().forEach((eachPng) => {
   pngHashMap.set(imgName, { imgName, icon: req(eachPng).default || imgConfig })
 })
 
-// const props = defineProps<Props>({
+const props = defineProps<Props>()
+
+// const props = defineProps({
 //   node: {
-//     type: Array,
-//     default: [],
+//     type: {} as PropType<CardNode | string>,
 //   },
 // })
-
-const props = defineProps<Props>()
 const emit = defineEmits(["clickCard"])
 
 const isFreeze = computed(() => {

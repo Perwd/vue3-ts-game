@@ -105,8 +105,8 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineProps, defineEmits } from 'vue'
-import type { CardNode } from '../types/ylyGame'
+import { computed } from "vue"
+import type { CardNode } from "../types/ylyGame"
 
 interface Props {
   node: CardNode
@@ -116,63 +116,73 @@ interface Props {
 const imgs = [
   {
     type: 1,
-    src: '../assets/tutu/1.png',
+    src: "../assets/tutu/1.png",
   },
   {
     type: 2,
-    src: '../assets/tutu/2.png',
+    src: "../assets/tutu/2.png",
   },
   {
     type: 3,
-    src: '../assets/tutu/3.png',
+    src: "../assets/tutu/3.png",
   },
   {
     type: 4,
-    src: '../assets/tutu/4.png',
+    src: "../assets/tutu/4.png",
   },
   {
     type: 5,
-    src: '../assets/tutu/5.png',
+    src: "../assets/tutu/5.png",
   },
   {
     type: 6,
-    src: '../assets/tutu/6.png',
+    src: "../assets/tutu/6.png",
   },
   {
     type: 7,
-    src: '../assets/tutu/7.png',
+    src: "../assets/tutu/7.png",
   },
   {
     type: 8,
-    src: '../assets/tutu/8.png',
+    src: "../assets/tutu/8.png",
   },
   {
     type: 9,
-    src: '../assets/tutu/9.png',
+    src: "../assets/tutu/9.png",
   },
   {
     type: 10,
-    src: '../assets/tutu/10.png',
+    src: "../assets/tutu/10.png",
   },
   {
     type: 11,
-    src: '../assets/tutu/11.png',
+    src: "../assets/tutu/11.png",
   },
   {
     type: 12,
-    src: '../assets/tutu/12.png',
+    src: "../assets/tutu/12.png",
   },
   {
     type: 13,
-    src: '../assets/tutu/13.png',
+    src: "../assets/tutu/13.png",
   },
 ]
 // 加载图片资源
-// const modules = import.meta.glob('../assets/tutu/*.png', {
-//   as: 'url',
-//   import: 'default',
-//   eager: true,
-// })
+const modules = import.meta.glob("../assets/tutu/*.png", {
+  as: "url",
+  import: "default",
+  eager: true,
+})
+
+const req = require.context("../assets/tutu", true, /\.png$/)
+const pngHashMap = new Map()
+const pngHashMap = new Map()
+
+req.keys().forEach((eachPng) => {
+  const imgConfig = req(eachPng)
+  const imgName = eachPng.replace(/^\.\/(.*)\.\w+$/, "$1")
+  pngHashMap.set(imgName, { imgName, icon: req(eachPng).default || imgConfig })
+})
 
 // const props = defineProps<Props>({
 //   node: {
@@ -180,17 +190,18 @@ const imgs = [
 //     default: [],
 //   },
 // })
+
 const props = defineProps<Props>()
-const emit = defineEmits(['clickCard'])
+const emit = defineEmits(["clickCard"])
 
 const isFreeze = computed(() => {
   return props.node.parents.length > 0
-    ? props.node.parents.some((o) => typeof o.state === 'number' && o.state < 2)
+    ? props.node.parents.some((o) => typeof o.state === "number" && o.state < 2)
     : false
 })
 
 function handleClick() {
-  if (!isFreeze.value) emit('clickCard', props.node)
+  if (!isFreeze.value) emit("clickCard", props.node)
 }
 </script>
 

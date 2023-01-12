@@ -116,55 +116,55 @@ interface Props {
 const imgs = [
   {
     type: 1,
-    src: "../assets/tutu/1.png",
+    src: require("./assets/tutu/1.png"),
   },
   {
     type: 2,
-    src: "../assets/tutu/2.png",
+    src: "./assets/tutu/2.png",
   },
   {
     type: 3,
-    src: "../assets/tutu/3.png",
+    src: "./assets/tutu/3.png",
   },
   {
     type: 4,
-    src: "../assets/tutu/4.png",
+    src: "./assets/tutu/4.png",
   },
   {
     type: 5,
-    src: "../assets/tutu/5.png",
+    src: "./assets/tutu/5.png",
   },
   {
     type: 6,
-    src: "../assets/tutu/6.png",
+    src: "./assets/tutu/6.png",
   },
   {
     type: 7,
-    src: "../assets/tutu/7.png",
+    src: "./assets/tutu/7.png",
   },
   {
     type: 8,
-    src: "../assets/tutu/8.png",
+    src: "./assets/tutu/8.png",
   },
   {
     type: 9,
-    src: "../assets/tutu/9.png",
+    src: "./assets/tutu/9.png",
   },
   {
     type: 10,
-    src: "../assets/tutu/10.png",
+    src: "./assets/tutu/10.png",
   },
   {
     type: 11,
-    src: "../assets/tutu/11.png",
+    src: "./assets/tutu/11.png",
   },
   {
     type: 12,
-    src: "../assets/tutu/12.png",
+    src: "./assets/tutu/12.png",
   },
   {
     type: 13,
-    src: "../assets/tutu/13.png",
+    src: "./assets/tutu/13.png",
   },
 ]
 // 加载图片资源

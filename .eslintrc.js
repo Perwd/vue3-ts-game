@@ -1,22 +1,23 @@
 module.exports = {
-  //运行环境
   env: {
-    //是否启用浏览器
     browser: true,
     es2021: true,
+    node: true,
+    "vue/setup-compiler-macros": true,
   },
-  //解析器
   parser: "vue-eslint-parser",
-  //vue的额外添加规则
-  extends: "plugin:vue/vue3-essential",
-  // extends: 'plugin:@typescript-eslint/eslint-recommended',
+  extends: [
+    "eslint:recommended",
+    "plugin:vue/vue3-essential",
+    "plugin:@typescript-eslint/recommended",
+  ],
   overrides: [],
+  //   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: "latest",
-    parser: "@typescript-eslint/parser",
     sourceType: "module",
+    parser: "@typescript-eslint/parser",
   },
-  // 插件
   plugins: ["vue", "@typescript-eslint"],
   rules: {
     "vue/no-parsing-error": [

@@ -116,7 +116,8 @@ interface Props {
 const imgs = [
   {
     type: 1,
-    src: require("./assets/tutu/1.png"),
+    // src: require("./assets/tutu/1.png"),
+    src: "./assets/tutu/1.png",
   },
   {
     type: 2,
@@ -173,6 +174,7 @@ const modules = import.meta.glob("../assets/tutu/*.png", {
   import: "default",
   eager: true,
 })
+console.log(modules)
 
 const req = require.context("../assets/tutu", true, /\.png$/)
 const pngHashMap = new Map()

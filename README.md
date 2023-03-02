@@ -29,3 +29,12 @@ npm run lint
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+<!--
+ // resolve: {
+  //   extensions: [".vue", ".mjs", ".js", ".ts", ".jsx", ".tsx", ".json"],
+  //   alias: {
+  //     "@": path.resolve(__dirname, "/src"),
+  //   },
+  // },
+ -->

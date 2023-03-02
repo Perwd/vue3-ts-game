@@ -62,7 +62,7 @@ let indexSet = () => {
 }
 
 let size = 10
-let perFloorNodes = []
+// let perFloorNodes = []
 // 建立遮罩关系
 floorList.forEach((o, index) => {
   //   indexSet.clear();
@@ -70,7 +70,7 @@ floorList.forEach((o, index) => {
   const floorNodes: CardNode[] = []
   o.forEach((k) => {
     i = floor(random(0, (index + 1) ** 2))
-    while (indexSet.has(i)) i = floor(random(0, (index + 1) ** 2))
+    // while (indexSet.has(i)) i = floor(random(0, (index + 1) ** 2))
     const row = floor(i / (index + 1))
     const column = index ? i % index : 0
     const node: CardNode = {
@@ -87,12 +87,12 @@ floorList.forEach((o, index) => {
     }
     const xy = [node.top, node.left]
 
-    perFloorNodes.forEach((e) => {
-      if (Math.abs(e.top - xy[0]) <= size && Math.abs(e.left - xy[1]) <= size)
-        e.parents.push(node)
-    })
+    // perFloorNodes.forEach((e) => {
+    //   if (Math.abs(e.top - xy[0]) <= size && Math.abs(e.left - xy[1]) <= size)
+    //     e.parents.push(node)
+    // })
     floorNodes.push(node)
-    indexSet.add(i)
+    // indexSet.add(i)
   })
   //   nodes.value = nodes.value.concat(floorNodes);
   //   perFloorNodes = floorNodes;

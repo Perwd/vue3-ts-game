@@ -169,26 +169,26 @@ const imgs = [
   },
 ]
 // 加载图片资源
-const modules = import.meta.glob("../assets/tutu/*.png", {
-  as: "url",
-  import: "default",
-  eager: true,
-})
-console.log(modules)
+// const modules = import.meta.glob("../assets/tutu/*.png", {
+//   as: "url",
+//   import: "default",
+//   eager: true,
+// })
+// console.log(modules)
 
-const req = require.context("../assets/tutu", true, /\.png$/)
+// const req = require.context("../assets/tutu", true, /\.png$/)
 const pngHashMap = new Map()
 
-req.keys().forEach((eachPng) => {
-  const imgConfig = req(eachPng)
-  const imgName = eachPng.replace(/^\.\/(.*)\.\w+$/, "$1")
-  pngHashMap.set(imgName, { imgName, icon: req(eachPng).default || imgConfig })
-})
-const IMG_MAP = Object.keys(modules).reduce((acc, cur) => {
-  const key = cur.replace("../assets/tutu/", "").replace(".png", "")
-  acc[key] = modules[cur]
-  return acc
-}, {} as Record<string, string>)
+// req.keys().forEach((eachPng) => {
+//   const imgConfig = req(eachPng)
+//   const imgName = eachPng.replace(/^\.\/(.*)\.\w+$/, "$1")
+//   pngHashMap.set(imgName, { imgName, icon: req(eachPng).default || imgConfig })
+// })
+// const IMG_MAP = Object.keys(modules).reduce((acc, cur) => {
+//   const key = cur.replace("../assets/tutu/", "").replace(".png", "")
+//   acc[key] = modules[cur]
+//   return acc
+// }, {} as Record<string, string>)
 // const props = defineProps<Props>({
 //   node: {
 //     type: Array,

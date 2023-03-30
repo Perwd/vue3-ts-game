@@ -1,12 +1,11 @@
 <template>
   <Card />
-  11
 </template>
 
 <script lang="ts" setup>
 // import { computed, ref } from "vue"
 import type { CardNode } from "../types/ylyGame"
-// import Card from "./components/cardNode.vue"
+import Card from "./components/cardNode.vue"
 
 interface Props {
   node: CardNode

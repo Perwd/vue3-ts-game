@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="card"
-    :style="
+  <!-- :style="
       isDock
         ? {}
         : {
@@ -10,18 +8,10 @@
             top: `${node.top}px`,
             left: `${node.left}px`,
           }
-    "
-    @click="handleClick"
-    v-for="img in imgs"
-    :key="img.type"
-  >
-    <img
-      v-if="img.type === node.type"
-      :src="img.src"
-      alt=""
-      width="40"
-      height="40"
-    />
+    " -->
+  <div class="card" @click="handleClick" v-for="img in imgs" :key="img.type">
+    <!--  v-if="img.type === node.type" -->
+    <img :src="img.src" alt="" width="40" height="40" />
     <!-- <img
       v-if="node.type === 1"
       src="../assets/tutu/1.png"
@@ -112,72 +102,81 @@ interface Props {
   node: CardNode
   isDock?: boolean
 }
-
-const imgs = [
-  {
-    type: 1,
-    // src: require("./assets/tutu/1.png"),
-    src: "./assets/tutu/1.png",
-  },
-  {
-    type: 2,
-    src: "./assets/tutu/2.png",
-  },
-  {
-    type: 3,
-    src: "./assets/tutu/3.png",
-  },
-  {
-    type: 4,
-    src: "./assets/tutu/4.png",
-  },
-  {
-    type: 5,
-    src: "./assets/tutu/5.png",
-  },
-  {
-    type: 6,
-    src: "./assets/tutu/6.png",
-  },
-  {
-    type: 7,
-    src: "./assets/tutu/7.png",
-  },
-  {
-    type: 8,
-    src: "./assets/tutu/8.png",
-  },
-  {
-    type: 9,
-    src: "./assets/tutu/9.png",
-  },
-  {
-    type: 10,
-    src: "./assets/tutu/10.png",
-  },
-  {
-    type: 11,
-    src: "./assets/tutu/11.png",
-  },
-  {
-    type: 12,
-    src: "./assets/tutu/12.png",
-  },
-  {
-    type: 13,
-    src: "./assets/tutu/13.png",
-  },
-]
+let imgs = []
+// const imgs = [
+//   {
+//     type: 1,
+//     // src: require("./assets/tutu/1.png"),
+//     src: "../public/1.png",
+//   },
+//   {
+//     type: 2,
+//     src: "@/assets/tutu/2.png",
+//   },
+//   {
+//     type: 3,
+//     src: "./assets/tutu/3.png",
+//   },
+//   {
+//     type: 4,
+//     src: "./assets/tutu/4.png",
+//   },
+//   {
+//     type: 5,
+//     src: "./assets/tutu/5.png",
+//   },
+//   {
+//     type: 6,
+//     src: "./assets/tutu/6.png",
+//   },
+//   {
+//     type: 7,
+//     src: "./assets/tutu/7.png",
+//   },
+//   {
+//     type: 8,
+//     src: "./assets/tutu/8.png",
+//   },
+//   {
+//     type: 9,
+//     src: "./assets/tutu/9.png",
+//   },
+//   {
+//     type: 10,
+//     src: "./assets/tutu/10.png",
+//   },
+//   {
+//     type: 11,
+//     src: "./assets/tutu/11.png",
+//   },
+//   {
+//     type: 12,
+//     src: "./assets/tutu/12.png",
+//   },
+//   {
+//     type: 13,
+//     src: "./assets/tutu/13.png",
+//   },
+// ]
 // 加载图片资源
-// const modules = import.meta.glob("../assets/tutu/*.png", {
-//   as: "url",
-//   import: "default",
-//   eager: true,
-// })
-// console.log(modules)
-
+// 没开启src替换时 用 /src/assets/tutu/*.png 路径
+// @/assets/tutu/*.png
+const modules = import.meta.globEager("@/assets/tutu/*.png", {
+  as: "url",
+  import: "default",
+  eager: true,
+})
+console.log(modules)
+for (let key in modules) {
+  console.log(key)
+  imgs.push({
+    type: key,
+    src: modules[key],
+  })
+}
 // const req = require.context("../assets/tutu", true, /\.png$/)
-const pngHashMap = new Map()
+// console.log(req)
+// const pngHashMap = new Map()
 
 // req.keys().forEach((eachPng) => {
 //   const imgConfig = req(eachPng)
@@ -199,11 +198,16 @@ const pngHashMap = new Map()
 const props = defineProps<Props>()
 const emit = defineEmits(["clickCard"])
 
-const isFreeze = computed(() => {
-  return props.node.parents.length > 0
-    ? props.node.parents.some((o) => typeof o.state === "number" && o.state < 2)
-    : false
-})
+const isFreeze = computed(
+  () => {
+    return props.node?.parents.length > 0
+      ? props.node?.parents.some(
+          (o) => typeof o?.state === "number" && o?.state < 2
+        )
+      : false
+  }
+  // return console.log(1)
+)
 
 function handleClick() {
   if (!isFreeze.value) emit("clickCard", props.node)

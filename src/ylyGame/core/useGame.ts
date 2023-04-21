@@ -19,6 +19,12 @@ const defaultGameConfig: GameConfig = {
 
 export function useGame(config: GameConfig): Game {
   // cardNum默认4个卡牌  layerNum只有2层  trap陷阱开启  delNode不能删
+  const {
+    container,
+    delNode,
+    events = {},
+    ...initConfig
+  } = { ...defaultGameConfig, ...config }
 
   const indexSet = new Set()
   let nodes = ref<CardNode[]>([])
@@ -28,6 +34,8 @@ export function useGame(config: GameConfig): Game {
   const removeFlag = ref(false)
   const removeList = ref<CardNode[]>([])
 
+  const preNode = ref<CardNode | null>(null)
+  const histroyList = ref<CardNode[]>([])
   // type GameEvents = string | null
 
   let cardNum = 0,
@@ -36,7 +44,33 @@ export function useGame(config: GameConfig): Game {
   function handleBack() {}
   function handleRemove() {}
   function handleSelectRemove() {}
-  function handleSelect() {}
+
+  function handleSelect(node: CardNode) {
+    // 下面的卡槽为7
+    if (selectedNodes.value.length === 7) return false
+
+    // 卡牌
+    node.state = 2
+    histroyList.value.push(node)
+    preNode.value = node
+
+    const index = nodes.value.findIndex((o) => o.id === node.id)
+
+    if (index > -1) {
+      delNode && nodes.value.splice(index, 1)
+    }
+
+    // 判断是否有可以消除的节点 类型相等
+    const selectedSomeNode = selectedNodes.value.filter(
+      (s) => s.type === node.type
+    )
+
+    if (selectedSomeNode.length === 2) {
+      const secondIndex = selectedNodes.value.findIndex(
+        (o) => o.id === selectedSomeNode[1].id
+      )
+    }
+  }
 
   // // useGame.ts
   function initData(config?: GameConfig | null) {

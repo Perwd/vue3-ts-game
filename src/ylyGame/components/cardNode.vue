@@ -9,9 +9,22 @@
             left: `${node.left}px`,
           }
     " -->
-  <div class="card" @click="handleClick" v-for="img in imgs" :key="img.type">
+  <div
+    class="card"
+    :style="
+      isDock
+        ? {}
+        : {
+            position: 'absolute',
+            zIndex: node.zIndex,
+            top: `${node.top}px`,
+            left: `${node.left}px`,
+          }
+    "
+    @click="handleClick"
+  >
     <!--  v-if="img.type === node.type" -->
-    <img :src="img.src" alt="" width="40" height="40" />
+    <img :src="IMG_MAP[node.type]" alt="" width="40" height="40" />
     <!-- <img
       v-if="node.type === 1"
       src="../assets/tutu/1.png"
@@ -168,7 +181,7 @@ const modules = import.meta.globEager("@/assets/tutu/*.png", {
 })
 console.log(modules)
 for (let key in modules) {
-  console.log(key)
+  // console.log(key)
   imgs.push({
     type: key,
     src: modules[key],
@@ -176,35 +189,43 @@ for (let key in modules) {
 }
 // const req = require.context("../assets/tutu", true, /\.png$/)
 // console.log(req)
-// const pngHashMap = new Map()
+const pngHashMap = new Map()
 
-// req.keys().forEach((eachPng) => {
+// modules.keys().forEach((eachPng) => {
 //   const imgConfig = req(eachPng)
 //   const imgName = eachPng.replace(/^\.\/(.*)\.\w+$/, "$1")
 //   pngHashMap.set(imgName, { imgName, icon: req(eachPng).default || imgConfig })
 // })
-// const IMG_MAP = Object.keys(modules).reduce((acc, cur) => {
-//   const key = cur.replace("../assets/tutu/", "").replace(".png", "")
-//   acc[key] = modules[cur]
-//   return acc
-// }, {} as Record<string, string>)
-// const props = defineProps<Props>({
-//   node: {
-//     type: Array,
-//     default: [],
-//   },
-// })
+const IMG_MAP = Object.keys(modules).reduce((acc, cur) => {
+  const key = cur.replace("../assets/tutu/", "").replace(".png", "")
+  acc[key] = modules[cur]
+  return acc
+}, {} as Record<string, string>)
+const props = defineProps<Props>({
+  node: {
+    type: Array,
+    default: [],
+  },
+  isDock: Boolean,
+})
 
-const props = defineProps<Props>()
+// const props = defineProps<Props>()
 const emit = defineEmits(["clickCard"])
 
 const isFreeze = computed(
   () => {
-    return props.node?.parents.length > 0
-      ? props.node?.parents.some(
-          (o) => typeof o?.state === "number" && o?.state < 2
-        )
-      : false
+    if (props.node?.parents.length > 0) {
+      return props.node?.parents.some((o) => {
+        typeof o.state === "number" && o?.state < 2
+      })
+    } else {
+      return false
+    }
+    // return props.node?.parents.length > 0
+    //   ? props.node?.parents.some(
+    //       (o) => typeof o?.state === "number" && o?.state < 2
+    //     )
+    //   : false
   }
   // return console.log(1)
 )
